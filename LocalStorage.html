@@ -6,33 +6,25 @@
 
 
 <script>
-    var userName = getUserName()
-    if(userName == null){
-    user = prompt("Please enter your name:","");
-    saveUser(user);
+    checkUser();
+
+function checkUser() {
+    if (typeof(Storage) == "undefined") {
+        document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+        return;
     }
 
-// Check browser support
-function saveUser(userName){
-    if (typeof(Storage) !== "undefined") {
-    // Store
-    localStorage.setItem("lastname", userName);
-    document.getElementById("result").innerHTML = "User saved successfully : "+userName
-    } else {
-    document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+    var username = localStorage.getItem("username");
+    if (username) {
+        document.getElementById("result").innerHTML = "Found user: " + username;
+        return;
     }
-}
 
-function getUserName(){
-    if (typeof(Storage) !== "undefined") {
-    // Retrieve
-    var name = localStorage.getItem("lastname");
-    document.getElementById("result").innerHTML = "Found user login "+name
-    return name;
-    } else {
-    document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+    username = prompt("Please enter your name:", "");
+    if (username) {
+        localStorage.setItem("username", username);
     }
-    return null
+    checkUser()
 }
 </script>
 
