@@ -6,7 +6,7 @@
 
 
 <script>
-checkCookie()
+checkUser()
 
 /*
 https://www.w3schools.com/js/js_cookies.asp
@@ -34,16 +34,19 @@ function getCookie(cname) {
   return "";
 }
 
-function checkCookie() {
-  let user = getCookie("username");
-  if (user != "") {
-    alert("Welcome again " + user);
-  } else {
-    user = prompt("Please enter your name:", "");
-    if (user != "" && user != null) {
-      setCookie("username", user);
-    }
+function checkUser() {
+    
+  let username = getCookie("username");
+  if (username) {
+    document.getElementById("result").innerHTML = "Found user: " + username;
+    return;
   }
+
+  username = prompt("Please enter your name:", "");
+  if (username) {
+    setCookie("username", username);
+  }
+  checkUser()
 }
 </script>
 
