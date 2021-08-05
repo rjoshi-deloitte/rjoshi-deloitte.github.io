@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html>
 <body>
-
+​
 <div id="result"></div>
-
-
+<button onclick="navigateToNextPage()">Replace document</button>
+​
 <script>
-checkUser()
-
+// checkUser()
+​
 /*
 https://www.w3schools.com/js/js_cookies.asp
 */
-
+​
 function setCookie(cname, cvalue) {
   const d = new Date();
   d.setTime(d.getTime() + (24 * 60 * 60 * 1000));
   let expires = "expires="+d.toUTCString();
   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
-
+​
 function getCookie(cname) {
   let name = cname + "=";
   let ca = document.cookie.split(';');
@@ -33,7 +33,7 @@ function getCookie(cname) {
   }
   return "";
 }
-
+​
 function checkUser() {
     
   let username = getCookie("username");
@@ -41,14 +41,18 @@ function checkUser() {
     document.getElementById("result").innerHTML = "Found user: " + username;
     return;
   }
-
+​
   username = prompt("Please enter your name:", "");
   if (username) {
     setCookie("username", username);
   }
   checkUser()
 }
+​
+function navigateToNextPage() {
+  location.replace("https://www.w3schools.com")
+}
 </script>
-
+​
 </body>
 </html>
